@@ -143,8 +143,9 @@ export default {
             await sbp('backend/publishLogEntry', inviteToMailbox)
           }
         }
-        // TODO: global success message (see #175) and redirect to previous page instead?
-        this.form.success = true
+        // TODO: global success message (see #175)
+        // return to group dashboard
+        this.$router.push({path: '/dashboard'})
       } catch (error) {
         console.error(error)
         // TODO: Create More descriptive errors

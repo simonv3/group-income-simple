@@ -1,6 +1,8 @@
 <template>
   <div class="level">
     <div class="level-left">
+      {{ invites }}
+
       <ul class="columns is-mobile is-narrow is-multiline is-marginless">
         <li v-for="(member, username) in profiles"
           class="column is-narrow badge"
@@ -30,6 +32,8 @@
         </a>
       </div>
     </div>
+  </div>
+  <div class="level">
   </div>
 </template>
 <style lang="scss" scoped>
@@ -96,6 +100,9 @@ export default {
     }
   },
   computed: {
+    invites () {
+      return this.$store.getters.invitationsToGroup()
+    },
     profiles () {
       return this.$store.getters.profilesForGroup()
     }

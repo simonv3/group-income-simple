@@ -188,6 +188,12 @@ const getters = {
       )
     }
   },
+  invitationsToGroup (state, getters) {
+    return groupId => {
+      groupId = groupId || state.currentGroupId
+      return groupId && state[groupId].invitees;
+    }
+  },
   memberCount (state, getters) {
     return groupId => {
       if (!groupId) groupId = state.currentGroupId

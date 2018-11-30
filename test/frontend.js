@@ -19,6 +19,7 @@ function elT (el) {
 }
 
 function page (page) {
+  console.log('frontend', process.env.FRONTEND_URL)
   return url.resolve(process.env.FRONTEND_URL, `simple/${page}`)
 }
 
@@ -87,8 +88,8 @@ describe('Frontend', function () {
     // in order to get useful debugging information
     // NOTE: you can change the wait and execution timeouts to higher numbers
     //       like 60000 to facility with SHOW_BROWSER based debugging
-    // waitTimeout: 60000,
-    waitTimeout: 2000,
+    waitTimeout: 60000,
+    // waitTimeout: 2000,
     executionTimeout: 1000,
     height: 900
   })
@@ -198,7 +199,7 @@ describe('Frontend', function () {
 
   describe('Group Creation Test', function () {
     it('Create Additional User', function () {
-      this.timeout(8000)
+      this.timeout(80000)
       return n.use(logout()).use(signup(username + '2', 'test2@testgroupincome.com', 'testtest'))
     })
 
@@ -275,7 +276,7 @@ describe('Frontend', function () {
     })
 
     it('Should invite members to group', async function () {
-      this.timeout(4000)
+      this.timeout(80000)
 
       const count = await n
         .click(elT('inviteButton'))
@@ -297,8 +298,11 @@ describe('Frontend', function () {
         .click(elT('addButton'))
         .wait(el => document.querySelectorAll(el).length > 1, elT('member'))
         .click(elT('submit'))
+        .wait(5000)
         .wait(el => !!document.querySelector(el), elT('notifyInvitedSuccess'))
         .evaluate(el => !!document.querySelector(el), elT('notifyInvitedSuccess'))
+        .wait(5000)
+        .wait('.c-dashboard-section')
       should(created).equal(true)
     })
 
@@ -473,6 +477,10 @@ describe('Frontend', function () {
       should(memberNames[0]).equal(username + '5')
       should(memberNames[1]).equal(username)
       should(memberNames[2]).equal(username + '2')
+    })
+
+    it('Should invite a user to an existing group', async function () {
+
     })
   })
 
