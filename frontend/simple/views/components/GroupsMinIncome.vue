@@ -35,7 +35,9 @@ export default {
   },
   methods: {
     openProposal () {
-      sbp('okTurtles.events/emit', OPEN_MODAL, Mincome)
+      sbp('okTurtles.events/emit', OPEN_MODAL, Mincome, {
+        group: this.group
+      })
     }
   }
 }

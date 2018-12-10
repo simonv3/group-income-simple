@@ -21,6 +21,7 @@ export default sbp('sbp/selectors/register', {
   },
   'okTurtles.events/emit': function (event: string, ...data: any) {
     const listeners = sbp('okTurtles.data/get', listenKey(event)) || []
+    console.log('listeners', listeners, data)
     listeners.forEach(listener => listener(...data))
   },
   // almost identical to Vue.prototype.$off, except we require `event` argument
